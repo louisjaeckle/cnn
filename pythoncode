@@ -6,10 +6,10 @@ import math
 
 
 def sigmoid(value):
-   if value <= -705:
-       return 0
-   else:
-       return 1 / (1 + (math.exp(-value)))
+    if value <= -705:
+        return 0
+    else:
+        return 1 / (1 + (math.exp(-value)))
 
 
 #model_screenshots_directories = ['00040Esmee004_SDiv1.png', '00079_Nash002_Basics_Free.png', 'lowpoly_max.png', 'rp_dennis_posed_004_100k.png', 'rp_mei_posed_001_100k.png', 'RUST_3d_Low1.png']
@@ -24,66 +24,66 @@ max_output_image_width = 0
 #generates list of pixel values for all screenshots
 w_screenshot_pixels = []
 for image_index in range(len(input_photo_directories)):
- w_screenshot_pixels.append([])
- im = Image.open(input_photo_directories[image_index])
- pix = im.load()
- width,height = im.size
- if height >max_input_image_height:
-     max_input_image_height = height
- if width>max_input_image_width:
-     max_input_image_width = width
- for color_channel in range(3):
-     w_screenshot_pixels[-1].append([])
-     for row in range(height):
-         w_screenshot_pixels[-1][-1].append([])
-         for column in range(width):
-             w_screenshot_pixels[-1][-1][-1].append(pix[column,row][color_channel])
+  w_screenshot_pixels.append([])
+  im = Image.open(input_photo_directories[image_index])
+  pix = im.load()
+  width,height = im.size
+  if height >max_input_image_height:
+      max_input_image_height = height
+  if width>max_input_image_width:
+      max_input_image_width = width
+  for color_channel in range(3):
+      w_screenshot_pixels[-1].append([])
+      for row in range(height):
+          w_screenshot_pixels[-1][-1].append([])
+          for column in range(width):
+              w_screenshot_pixels[-1][-1][-1].append(pix[column,row][color_channel])
 
 for image_index in range(len(w_screenshot_pixels)):
-   for color_channel in range(len(w_screenshot_pixels[image_index])):
-       for image_row in range(len(w_screenshot_pixels[image_index][color_channel])):
-           while len(w_screenshot_pixels[image_index][color_channel][image_row]) < max_input_image_width:
-               w_screenshot_pixels[image_index][color_channel][image_row].append(0)
-       while len(w_screenshot_pixels[image_index][color_channel]) < max_input_image_height:
-           w_screenshot_pixels[image_index][color_channel].append([])
-           for image_column in range(max_input_image_width):
-               w_screenshot_pixels[image_index][color_channel][-1].append(0)
+    for color_channel in range(len(w_screenshot_pixels[image_index])):
+        for image_row in range(len(w_screenshot_pixels[image_index][color_channel])):
+            while len(w_screenshot_pixels[image_index][color_channel][image_row]) < max_input_image_width:
+                w_screenshot_pixels[image_index][color_channel][image_row].append(0)
+        while len(w_screenshot_pixels[image_index][color_channel]) < max_input_image_height:
+            w_screenshot_pixels[image_index][color_channel].append([])
+            for image_column in range(max_input_image_width):
+                w_screenshot_pixels[image_index][color_channel][-1].append(0)
 all_inputs = w_screenshot_pixels
 
 
 w_screenshot_pixels = []
 for image_index in range(len(output_photo_directories)):
- w_screenshot_pixels.append([])
- im = Image.open(output_photo_directories[image_index])
- pix = im.load()
- width,height = im.size
- if height >max_output_image_height:
-     max_output_image_height = height
- if width>max_output_image_width:
-     max_output_image_width = width
- for color_channel in range(3):
-     w_screenshot_pixels[-1].append([])
-     for row in range(height):
-         w_screenshot_pixels[-1][-1].append([])
-         for column in range(width):
-             w_screenshot_pixels[-1][-1][-1].append(pix[column,row][color_channel])
+  w_screenshot_pixels.append([])
+  im = Image.open(output_photo_directories[image_index])
+  pix = im.load()
+  width,height = im.size
+  if height >max_output_image_height:
+      max_output_image_height = height
+  if width>max_output_image_width:
+      max_output_image_width = width
+  for color_channel in range(3):
+      w_screenshot_pixels[-1].append([])
+      for row in range(height):
+          w_screenshot_pixels[-1][-1].append([])
+          for column in range(width):
+              w_screenshot_pixels[-1][-1][-1].append(pix[column,row][color_channel])
 
 for image_index in range(len(w_screenshot_pixels)):
-   for color_channel in range(len(w_screenshot_pixels[image_index])):
-       for image_row in range(len(w_screenshot_pixels[image_index][color_channel])):
-           while len(w_screenshot_pixels[image_index][color_channel][image_row]) < max_output_image_width:
-               w_screenshot_pixels[image_index][color_channel][image_row].append(0)
-       while len(w_screenshot_pixels[image_index][color_channel]) < max_output_image_height:
-           w_screenshot_pixels[image_index][color_channel].append([])
-           for image_column in range(max_output_image_width):
-               w_screenshot_pixels[image_index][color_channel][-1].append(0)
+    for color_channel in range(len(w_screenshot_pixels[image_index])):
+        for image_row in range(len(w_screenshot_pixels[image_index][color_channel])):
+            while len(w_screenshot_pixels[image_index][color_channel][image_row]) < max_output_image_width:
+                w_screenshot_pixels[image_index][color_channel][image_row].append(0)
+        while len(w_screenshot_pixels[image_index][color_channel]) < max_output_image_height:
+            w_screenshot_pixels[image_index][color_channel].append([])
+            for image_column in range(max_output_image_width):
+                w_screenshot_pixels[image_index][color_channel][-1].append(0)
 all_goal_outputs = []
 for image in range(len(w_screenshot_pixels)):
-   all_goal_outputs.append([])
-   for depth_layer in range(len(w_screenshot_pixels[-1])):
-       for row in range(len(w_screenshot_pixels[-1][-1])):
-           for column in range(len(w_screenshot_pixels[-1][-1][-1])):
-               all_goal_outputs[-1].append(w_screenshot_pixels[image][depth_layer][row][column])
+    all_goal_outputs.append([])
+    for depth_layer in range(len(w_screenshot_pixels[-1])):
+        for row in range(len(w_screenshot_pixels[-1][-1])):
+            for column in range(len(w_screenshot_pixels[-1][-1][-1])):
+                all_goal_outputs[-1].append(w_screenshot_pixels[image][depth_layer][row][column])
 # above this extracts pixel values
 
 
@@ -108,14 +108,14 @@ conv_layers_output_height = len(all_inputs[0][0])
 conv_layers_output_width = len(all_inputs[0][0][0])
 conv_layers_output_sizes = []#list of all layers [depth,height,width] indexed as [layer-1][dimension(0,1, or 2)]
 for conv_layer in conv_layers:
-   if conv_layer[0] == "conv":
-       conv_layers_output_depth*=conv_layer[1]
-       conv_layers_output_height = math.ceil(conv_layers_output_height/conv_layer[3])
-       conv_layers_output_width = math.ceil(conv_layers_output_width/conv_layer[2])
-   elif conv_layer[0] == "maxpool":
-       conv_layers_output_height = math.ceil(conv_layers_output_height/conv_layer[1])
-       conv_layers_output_width = math.ceil(conv_layers_output_width/conv_layer[2])
-   conv_layers_output_sizes.append([conv_layers_output_depth, conv_layers_output_height, conv_layers_output_width])
+    if conv_layer[0] == "conv":
+        conv_layers_output_depth*=conv_layer[1]
+        conv_layers_output_height = math.ceil(conv_layers_output_height/conv_layer[3])
+        conv_layers_output_width = math.ceil(conv_layers_output_width/conv_layer[2])
+    elif conv_layer[0] == "maxpool":
+        conv_layers_output_height = math.ceil(conv_layers_output_height/conv_layer[1])
+        conv_layers_output_width = math.ceil(conv_layers_output_width/conv_layer[2])
+    conv_layers_output_sizes.append([conv_layers_output_depth, conv_layers_output_height, conv_layers_output_width])
 conv_layers_output_size = conv_layers_output_depth*conv_layers_output_height*conv_layers_output_width
 final_connected_neuron_layers[0] = conv_layers_output_size
 
@@ -134,62 +134,62 @@ layer_input_height = max_input_image_height
 layer_input_width = max_input_image_width
 layer_input_depth = 3 # 1 for each color channel
 for conv_layer in conv_layers:
-   conv_weights.append([])
-   conv_weight_momentums.append([])
-   if conv_layer[0] == "conv":
-       n_filters = conv_layer[1]
-       for filter in range(n_filters):
-           conv_weights[-1].append([])
-           conv_weight_momentums[-1].append([])
-           filter_width = conv_layer[5+(filter*2)]
-           filter_height = conv_layer[4+(filter*2)]
-           for filter_row in range(filter_height):
-               conv_weights[-1][-1].append([((random.random()*2)-1)*.01 for i in range(filter_width)])
-               conv_weight_momentums[-1][-1].append([0 for i in range(filter_width)])
+    conv_weights.append([])
+    conv_weight_momentums.append([])
+    if conv_layer[0] == "conv":
+        n_filters = conv_layer[1]
+        for filter in range(n_filters):
+            conv_weights[-1].append([])
+            conv_weight_momentums[-1].append([])
+            filter_width = conv_layer[5+(filter*2)]
+            filter_height = conv_layer[4+(filter*2)]
+            for filter_row in range(filter_height):
+                conv_weights[-1][-1].append([((random.random()*2)-1)*.01 for i in range(filter_width)])
+                conv_weight_momentums[-1][-1].append([0 for i in range(filter_width)])
 
 #generates a list of biases for conv filter layers
 conv_biases = []
 conv_bias_momentums = []
 save_conv_biases = []
 for conv_layer_index in range(len(conv_layers)):
-  conv_layer = conv_layers[conv_layer_index]
-  conv_biases.append([])
-  conv_bias_momentums.append([])
-  if conv_layer[0] == "conv":
-      for conv_depth_layer in range(conv_layers_output_sizes[conv_layer_index][0]):
-          conv_biases[-1].append([])
-          conv_bias_momentums[-1].append([])
-          for conv_row in range(conv_layers_output_sizes[conv_layer_index][1]):
-              conv_biases[-1][-1].append([])
-              conv_bias_momentums[-1][-1].append([])
-              for conv_column in range(conv_layers_output_sizes[conv_layer_index][2]):
-                  conv_biases[-1][-1][-1].append((random.random()*2)-1)
-                  conv_bias_momentums[-1][-1][-1].append(0)
+   conv_layer = conv_layers[conv_layer_index]
+   conv_biases.append([])
+   conv_bias_momentums.append([])
+   if conv_layer[0] == "conv":
+       for conv_depth_layer in range(conv_layers_output_sizes[conv_layer_index][0]):
+           conv_biases[-1].append([])
+           conv_bias_momentums[-1].append([])
+           for conv_row in range(conv_layers_output_sizes[conv_layer_index][1]):
+               conv_biases[-1][-1].append([])
+               conv_bias_momentums[-1][-1].append([])
+               for conv_column in range(conv_layers_output_sizes[conv_layer_index][2]):
+                   conv_biases[-1][-1][-1].append((random.random()*2)-1)
+                   conv_bias_momentums[-1][-1][-1].append(0)
 
 
 
 # squashes all inputs and goal_outputs between -1 and 1
 max_input = 0
 for input_image_index in range(len(all_inputs)):
-   for input_depth_layer in all_inputs[input_image_index]:
-       for input_row in input_depth_layer:
-           for input_pixel in input_row:
-               if abs(input_pixel)>max_input:
-                   max_input = abs(input_pixel)
-   for input_depth_layer_index in range(len(all_inputs[input_image_index])):
-       for input_row_index in range(len(all_inputs[input_image_index][input_depth_layer_index])):
-           for input_pixel_index in range(len(all_inputs[input_image_index][input_depth_layer_index][input_row_index])):
-               all_inputs[input_image_index][input_depth_layer_index][input_row_index][input_pixel_index] /= max_input
+    for input_depth_layer in all_inputs[input_image_index]:
+        for input_row in input_depth_layer:
+            for input_pixel in input_row:
+                if abs(input_pixel)>max_input:
+                    max_input = abs(input_pixel)
+    for input_depth_layer_index in range(len(all_inputs[input_image_index])):
+        for input_row_index in range(len(all_inputs[input_image_index][input_depth_layer_index])):
+            for input_pixel_index in range(len(all_inputs[input_image_index][input_depth_layer_index][input_row_index])):
+                all_inputs[input_image_index][input_depth_layer_index][input_row_index][input_pixel_index] /= max_input
 print("aga")
 print(max_input)
 max_goal_output = 0
 for goal_output_list in all_goal_outputs:
-   for goal_output_item in goal_output_list:
-       if abs(goal_output_item) > max_goal_output:
-           max_goal_output = abs(goal_output_item)
+    for goal_output_item in goal_output_list:
+        if abs(goal_output_item) > max_goal_output:
+            max_goal_output = abs(goal_output_item)
 for goal_output_list_index in range(len(all_goal_outputs)):
-   for goal_output_item_index in range(len(all_goal_outputs[goal_output_list_index])):
-       all_goal_outputs[goal_output_list_index][goal_output_item_index] /= max_goal_output
+    for goal_output_item_index in range(len(all_goal_outputs[goal_output_list_index])):
+        all_goal_outputs[goal_output_list_index][goal_output_item_index] /= max_goal_output
 n_final_neuron_layers = len(final_connected_neuron_layers)
 
 
@@ -197,14 +197,14 @@ final_weights = []
 final_weight_momentums = []
 save_final_weights = []
 for layer in range(n_final_neuron_layers - 1):
-   final_weights.append([])
-   final_weight_momentums.append([])
-   for f_neuron in range(final_connected_neuron_layers[layer + 1]):
-       final_weights[layer].append([])
-       final_weight_momentums[layer].append([])
-       for neuron in range(final_connected_neuron_layers[layer]):
-           final_weights[layer][f_neuron].append(((random.random()*2)-1)/ (final_connected_neuron_layers[layer]**.5))
-           final_weight_momentums[layer][f_neuron].append(0)
+    final_weights.append([])
+    final_weight_momentums.append([])
+    for f_neuron in range(final_connected_neuron_layers[layer + 1]):
+        final_weights[layer].append([])
+        final_weight_momentums[layer].append([])
+        for neuron in range(final_connected_neuron_layers[layer]):
+            final_weights[layer][f_neuron].append(((random.random()*2)-1)/ (final_connected_neuron_layers[layer]**.5))
+            final_weight_momentums[layer][f_neuron].append(0)
 # weights organized by destination neuron first e.g. [[w00,w10],[w01,w11]]
 # weight indexes are indexed from weights headed to the second layer=0
 # weights[initial_weight_layer][destination_neuron_index][inital_neuron_index]
@@ -214,117 +214,117 @@ final_biases = []  # indexed as biases[layer-1][neuron]
 final_bias_momentums = []
 save_final_biases = []
 for layer in range(n_final_neuron_layers - 1):
-  final_biases.append([])
-  final_bias_momentums.append([])
-  for neuron in range(final_connected_neuron_layers[layer + 1]):
-      final_biases[-1].append((random.random()*2-1) / (final_connected_neuron_layers[layer] ** .5))
-      final_bias_momentums[-1].append(0)
+   final_biases.append([])
+   final_bias_momentums.append([])
+   for neuron in range(final_connected_neuron_layers[layer + 1]):
+       final_biases[-1].append((random.random()*2-1) / (final_connected_neuron_layers[layer] ** .5))
+       final_bias_momentums[-1].append(0)
 
 
 def conv_f_propogate(inputs1,conv_layer): # inputs is a list of lists- each sublist is another "depth" of conv layer
-   layer_output = []
-   n_rows = len(inputs1[0])
-   n_columns = len(inputs1[0][0])
-   if conv_layers[conv_layer][0] == "conv":
-       filter_horizontal_step = conv_layers[conv_layer][2]
-       filter_vertical_step = conv_layers[conv_layer][3]
-       for filter in range(conv_layers[conv_layer][1]):
-           filter_weights = conv_weights[conv_layer][filter]
-           filter_height = len(filter_weights)
-           filter_width = len(filter_weights[0])
-           for input_depth_layer_index in range(len(inputs1)):
-               input_depth_layer = inputs1[input_depth_layer_index]
-               layer_output.append([])
-               for input_row_filter_index in range(math.ceil(len(input_depth_layer)/filter_vertical_step)):#top left pixel row of filter
-                   input_row_index = input_row_filter_index*filter_vertical_step
-                   layer_output[-1].append([])
-                   filter_height_adjustor = 0 # filter height adjustor shortens height of filter if filter runs off of image
-                   if input_row_index > n_rows-filter_height:
-                       filter_height_adjustor = filter_height-(n_rows-input_row_index)
-                   for input_filter_index in range(math.ceil(len(input_depth_layer[input_row_index])/filter_horizontal_step)):#top left pixel column of filter
-                       input_pixel_index = input_filter_index*filter_horizontal_step
-                       output_pixel_value = 0
-                       filter_width_adjustor = 0 # filter width ajustor shortens width of filter if filter runs off image
-                       if input_pixel_index > n_columns-filter_width:
-                           filter_width_adjustor = filter_width - (n_columns-input_pixel_index)
-                       for filter_row in range(filter_height-filter_height_adjustor):
-                           for pixel_index in range(filter_width-filter_width_adjustor):
-                               pixel = input_depth_layer[input_row_index+filter_row][input_pixel_index+pixel_index]
-                               output_pixel_value+=filter_weights[filter_row][pixel_index]*pixel
-                       output_pixel_value += conv_biases[conv_layer][input_depth_layer_index + (filter * len(inputs1))][input_row_filter_index][filter]
-                       layer_output[-1][-1].append(output_pixel_value)
-   elif conv_layers[conv_layer][0] == "maxpool":
-       filter_width = conv_layers[conv_layer][2]
-       filter_height = conv_layers[conv_layer][1]
-       for input_depth_layer_index in range(len(inputs1)):
-           conv_winners[-1][-1].append([])#indexed as (for maxpool layers)[data index][conv layer(initial weight layer)][depth layer][forward row][forward column][max pixel coordinate(0 or 1)]
-           input_depth_layer = inputs1[input_depth_layer_index]
-           layer_output.append([])
-           for input_filter_row_index in range(int(math.ceil(len(input_depth_layer)/filter_height))):
-               conv_winners[-1][-1][-1].append([])
-               layer_output[-1].append([])
-               input_row_index = input_filter_row_index*filter_height
-               filter_height_adjustor = 0
-               if input_row_index> n_rows-filter_height: # filter height adjustor shortens height of filter if filter runs off of image
-                   filter_height_adjustor = filter_height-(n_rows-input_row_index)
-               for input_filter_column_index in range(int(math.ceil(len(input_depth_layer[input_row_index])/filter_width))):
-                   filter_max = -1000
-                   filter_pixel_coordinates = []#list of [pixel row,pixel column]
-                   input_column_index = input_filter_column_index*filter_width
-                   filter_width_adjustor = 0 # filter width ajustor shortens width of filter if filter runs off image
-                   if input_column_index>n_columns-filter_width:
-                       filter_width_adjustor = filter_width - (n_columns-input_column_index)
-                   for filter_row in range(filter_height-filter_height_adjustor):
-                       for filter_pixel in range(filter_width-filter_width_adjustor):
-                           pixel = input_depth_layer[input_row_index+filter_row][input_column_index+filter_pixel]
-                           if pixel>=filter_max:
-                               filter_max = pixel
-                               filter_pixel_coordinates = [filter_row,filter_pixel]
-                   layer_output[-1][-1].append(filter_max)
-                   conv_winners[-1][-1][-1][-1].append(filter_pixel_coordinates)
-   elif conv_layers[conv_layer][0] == "relu":
-       for input_depth_layer in inputs1:
-           layer_output.append([])
-           for input_row in input_depth_layer:
-               layer_output[-1].append([])
-               for input_pixel in input_row:
-                   if input_pixel>0:
-                       layer_output[-1][-1].append(input_pixel)
-                   else:
-                       layer_output[-1][-1].append(0)
-   return(layer_output)
+    layer_output = []
+    n_rows = len(inputs1[0])
+    n_columns = len(inputs1[0][0])
+    if conv_layers[conv_layer][0] == "conv":
+        filter_horizontal_step = conv_layers[conv_layer][2]
+        filter_vertical_step = conv_layers[conv_layer][3]
+        for filter in range(conv_layers[conv_layer][1]):
+            filter_weights = conv_weights[conv_layer][filter]
+            filter_height = len(filter_weights)
+            filter_width = len(filter_weights[0])
+            for input_depth_layer_index in range(len(inputs1)):
+                input_depth_layer = inputs1[input_depth_layer_index]
+                layer_output.append([])
+                for input_row_filter_index in range(math.ceil(len(input_depth_layer)/filter_vertical_step)):#top left pixel row of filter
+                    input_row_index = input_row_filter_index*filter_vertical_step
+                    layer_output[-1].append([])
+                    filter_height_adjustor = 0 # filter height adjustor shortens height of filter if filter runs off of image
+                    if input_row_index > n_rows-filter_height:
+                        filter_height_adjustor = filter_height-(n_rows-input_row_index)
+                    for input_filter_index in range(math.ceil(len(input_depth_layer[input_row_index])/filter_horizontal_step)):#top left pixel column of filter
+                        input_pixel_index = input_filter_index*filter_horizontal_step
+                        output_pixel_value = 0
+                        filter_width_adjustor = 0 # filter width ajustor shortens width of filter if filter runs off image
+                        if input_pixel_index > n_columns-filter_width:
+                            filter_width_adjustor = filter_width - (n_columns-input_pixel_index)
+                        for filter_row in range(filter_height-filter_height_adjustor):
+                            for pixel_index in range(filter_width-filter_width_adjustor):
+                                pixel = input_depth_layer[input_row_index+filter_row][input_pixel_index+pixel_index]
+                                output_pixel_value+=filter_weights[filter_row][pixel_index]*pixel
+                        output_pixel_value += conv_biases[conv_layer][input_depth_layer_index + (filter * len(inputs1))][input_row_filter_index][filter]
+                        layer_output[-1][-1].append(output_pixel_value)
+    elif conv_layers[conv_layer][0] == "maxpool":
+        filter_width = conv_layers[conv_layer][2]
+        filter_height = conv_layers[conv_layer][1]
+        for input_depth_layer_index in range(len(inputs1)):
+            conv_winners[-1][-1].append([])#indexed as (for maxpool layers)[data index][conv layer(initial weight layer)][depth layer][forward row][forward column][max pixel coordinate(0 or 1)]
+            input_depth_layer = inputs1[input_depth_layer_index]
+            layer_output.append([])
+            for input_filter_row_index in range(int(math.ceil(len(input_depth_layer)/filter_height))):
+                conv_winners[-1][-1][-1].append([])
+                layer_output[-1].append([])
+                input_row_index = input_filter_row_index*filter_height
+                filter_height_adjustor = 0
+                if input_row_index> n_rows-filter_height: # filter height adjustor shortens height of filter if filter runs off of image
+                    filter_height_adjustor = filter_height-(n_rows-input_row_index)
+                for input_filter_column_index in range(int(math.ceil(len(input_depth_layer[input_row_index])/filter_width))):
+                    filter_max = -1000
+                    filter_pixel_coordinates = []#list of [pixel row,pixel column]
+                    input_column_index = input_filter_column_index*filter_width
+                    filter_width_adjustor = 0 # filter width ajustor shortens width of filter if filter runs off image
+                    if input_column_index>n_columns-filter_width:
+                        filter_width_adjustor = filter_width - (n_columns-input_column_index)
+                    for filter_row in range(filter_height-filter_height_adjustor):
+                        for filter_pixel in range(filter_width-filter_width_adjustor):
+                            pixel = input_depth_layer[input_row_index+filter_row][input_column_index+filter_pixel]
+                            if pixel>=filter_max:
+                                filter_max = pixel
+                                filter_pixel_coordinates = [filter_row,filter_pixel]
+                    layer_output[-1][-1].append(filter_max)
+                    conv_winners[-1][-1][-1][-1].append(filter_pixel_coordinates)
+    elif conv_layers[conv_layer][0] == "relu":
+        for input_depth_layer in inputs1:
+            layer_output.append([])
+            for input_row in input_depth_layer:
+                layer_output[-1].append([])
+                for input_pixel in input_row:
+                    if input_pixel>0:
+                        layer_output[-1][-1].append(input_pixel)
+                    else:
+                        layer_output[-1][-1].append(0)
+    return(layer_output)
 
 
 
 
 def final_f_propogate(inputs1, layer):  # the layer the inputs come from
-   layer_outputs = []
-   for f_neuron in range(final_connected_neuron_layers[layer+1]):
-       activation = 0
-       w_weights = final_weights[layer][f_neuron]
-       for input in range(len(inputs1)):
-           activation += w_weights[input] * inputs1[input]
-       layer_outputs.append(activation+final_biases[layer][f_neuron])
-   return layer_outputs
+    layer_outputs = []
+    for f_neuron in range(final_connected_neuron_layers[layer+1]):
+        activation = 0
+        w_weights = final_weights[layer][f_neuron]
+        for input in range(len(inputs1)):
+            activation += w_weights[input] * inputs1[input]
+        layer_outputs.append(activation+final_biases[layer][f_neuron])
+    return layer_outputs
 
 
 def deriv_sigmoid(value):
-   return (value * (1 - value))
+    return (value * (1 - value))
 
 
 #splits all_inputs and outputs into individual lists for training
 training_input_lists = []
 for input_list_index in range(int(len(all_inputs)/n_images_per_generation)):
-   if (input_list_index+1)*n_images_per_generation>len(all_inputs):
-       training_input_lists.append(all_inputs[input_list_index*n_images_per_generation:])
-   else:
-       training_input_lists.append(all_inputs[input_list_index*n_images_per_generation:(input_list_index+1)*n_images_per_generation])
+    if (input_list_index+1)*n_images_per_generation>len(all_inputs):
+        training_input_lists.append(all_inputs[input_list_index*n_images_per_generation:])
+    else:
+        training_input_lists.append(all_inputs[input_list_index*n_images_per_generation:(input_list_index+1)*n_images_per_generation])
 training_output_lists = []
 for output_list_index in range(int(len(all_goal_outputs)/n_images_per_generation)):
-   if (output_list_index+1)*n_images_per_generation>len(all_goal_outputs):
-       training_output_lists.append(all_goal_outputs[output_list_index*n_images_per_generation:])
-   else:
-       training_output_lists.append(all_goal_outputs[output_list_index*n_images_per_generation:(output_list_index+1)*n_images_per_generation])
+    if (output_list_index+1)*n_images_per_generation>len(all_goal_outputs):
+        training_output_lists.append(all_goal_outputs[output_list_index*n_images_per_generation:])
+    else:
+        training_output_lists.append(all_goal_outputs[output_list_index*n_images_per_generation:(output_list_index+1)*n_images_per_generation])
 
 
 
@@ -334,225 +334,223 @@ training_list_index = 0
 
 outputs = []
 for gen in range(n_generations):
- print("newgen")
+  print("newgen")
 
- inputs = training_input_lists[training_list_index]
- goal_outputs = training_output_lists[training_list_index]
- training_list_index+=1
- if training_list_index>=len(training_input_lists):
-     training_list_index = 0
-
-
- # forward
- conv_z_values = []  #indexed as [data_item_index][conv_layer-1][depth layer][row][pixel]
- conv_activations = []#indexed as [data_item_index][conv_layer][depth layer][row][pixel]
- final_z_values = []#indexed as [data_item_index][layer][neuron]
- final_activations = []  # indexed as [data_item_index][layer][neuron]
- conv_winners = []#indexed as (for maxpool layers)[data index][conv layer(initial weight layer)][depth layer][forward row][forward column][max pixel coordinate(0 or 1)]
- for data in range(len(inputs)):
-     outputs.append([])
-     conv_winners.append([])
-     conv_z_values.append([])
-     conv_activations.append([])
-     w_inputs = inputs[data]
-     w_data_z_values = []
-     conv_activations[-1].append(inputs[data])
-     for w_conv_layer in range(n_conv_layers):
-         conv_winners[-1].append([])
-         conv_z_values[-1].append([])
-         conv_activations[-1].append([])
-         w_layer_z_values = conv_f_propogate(w_inputs, w_conv_layer)
-         w_inputs = []
-         w_data_z_values.append(w_layer_z_values)
-         #applies sigmoid to z values
-         for w_input_depth_layer in w_layer_z_values:
-             w_inputs.append([])
-             conv_z_values[-1][-1].append([])
-             conv_activations[-1][-1].append([])
-             for w_input_row in w_input_depth_layer:
-                 conv_z_values[-1][-1][-1].append(w_input_row)
-                 w_inputs[-1].append([sigmoid(i) for i in w_input_row])
-                 conv_activations[-1][-1][-1].append(w_inputs[-1][-1])
-     #final connected neuron layers stuff
-     final_z_values.append([])#indexed as [data_item_index][neuron layer][neuron index]
-     final_activations.append([])#indexed as [data_item_index][neuron layer][neuron index]
-     final_activations[-1].append([])
-     final_z_values[-1].append([])
-     for conv_last_depth_layer_index in range(len(conv_activations[-1][-1])):
-         for conv_last_row_index in range(len(conv_activations[-1][-1][conv_last_depth_layer_index])):
-             for final_activation in conv_activations[-1][-1][conv_last_depth_layer_index][conv_last_row_index]:
-                 final_activations[-1][0].append(final_activation)
-     final_w_inputs = final_activations[-1][0]
-     for w_final_layer in range(len(final_connected_neuron_layers)-1):
-         final_layer_z_values = final_f_propogate(final_w_inputs,w_final_layer)
-         final_w_inputs = []
-         final_z_values.append(final_layer_z_values)
-         for final_z_val in final_layer_z_values:
-             final_w_inputs.append(sigmoid(final_z_val))
-         final_activations[-1].append(final_w_inputs)
-
- #gen error
- gen_error = 0
- for data_index in range(len(final_activations)):
-     for final_output_item in range(len(final_activations[data_index][-1])):
-         gen_error += .5 * ((goal_outputs[data_index][final_output_item] - final_activations[data_index][-1][final_output_item]) ** 2)
+  inputs = training_input_lists[training_list_index]
+  goal_outputs = training_output_lists[training_list_index]
+  training_list_index+=1
+  if training_list_index>=len(training_input_lists):
+      training_list_index = 0
 
 
- # backprop for final layers z values
- final_z_values_derivatives = []# indexed as [data_item_index][neuron layer][neuron index]//indexes not yet including -1s or +1s based on how list falls
- for data_item_index in range(len(final_activations)):
-     final_z_values_derivatives.append([])
-     final_z_values_derivatives[-1].append([])
-     for output_item_index in range(len(final_activations[data_item_index][-1])):
-         final_z_values_derivatives[-1][-1].append((final_activations[data_item_index][-1][output_item_index]-goal_outputs[data_item_index][output_item_index])*deriv_sigmoid(final_activations[data_item_index][-1][output_item_index]))
-     for final_z_values_derivatives_layer in reversed(range(len(final_activations[-1]) - 1)):
-         final_z_values_derivatives[-1].append([])
-         for final_z_value_index in range(len(final_activations[-1][final_z_values_derivatives_layer])):
-             final_z_value = final_activations[-1][final_z_values_derivatives_layer][final_z_value_index]
-             final_z_value_derivative = 0
-             for f_layer_z_value_derivative_index in range(len(final_z_values_derivatives[-1][-2])):
-                 final_z_value_derivative +=  final_weights[final_z_values_derivatives_layer][f_layer_z_value_derivative_index][final_z_value_index]*deriv_sigmoid(final_activations[data_item_index][final_z_values_derivatives_layer][final_z_value_index])
-             final_z_values_derivatives[-1][-1].append(final_z_value_derivative)
-     final_z_values_derivatives[-1]=list(reversed(final_z_values_derivatives[-1]))
+  # forward
+  conv_z_values = []  #indexed as [data_item_index][conv_layer-1][depth layer][row][pixel]
+  conv_activations = []#indexed as [data_item_index][conv_layer][depth layer][row][pixel]
+  final_z_values = []#indexed as [data_item_index][layer][neuron]
+  final_activations = []  # indexed as [data_item_index][layer][neuron]
+  conv_winners = []#indexed as (for maxpool layers)[data index][conv layer(initial weight layer)][depth layer][forward row][forward column][max pixel coordinate(0 or 1)]
+  for data in range(len(inputs)):
+      outputs.append([])
+      conv_winners.append([])
+      conv_z_values.append([])
+      conv_activations.append([])
+      w_inputs = inputs[data]
+      w_data_z_values = []
+      conv_activations[-1].append(inputs[data])
+      for w_conv_layer in range(n_conv_layers):
+          conv_winners[-1].append([])
+          conv_z_values[-1].append([])
+          conv_activations[-1].append([])
+          w_layer_z_values = conv_f_propogate(w_inputs, w_conv_layer)
+          w_inputs = []
+          w_data_z_values.append(w_layer_z_values)
+          #applies sigmoid to z values
+          for w_input_depth_layer in w_layer_z_values:
+              w_inputs.append([])
+              conv_z_values[-1][-1].append([])
+              conv_activations[-1][-1].append([])
+              for w_input_row in w_input_depth_layer:
+                  conv_z_values[-1][-1][-1].append(w_input_row)
+                  w_inputs[-1].append([sigmoid(i) for i in w_input_row])
+                  conv_activations[-1][-1][-1].append(w_inputs[-1][-1])
+      #final connected neuron layers stuff
+      final_z_values.append([])#indexed as [data_item_index][neuron layer][neuron index]
+      final_activations.append([])#indexed as [data_item_index][neuron layer][neuron index]
+      final_activations[-1].append([])
+      final_z_values[-1].append([])
+      for conv_last_depth_layer_index in range(len(conv_activations[-1][-1])):
+          for conv_last_row_index in range(len(conv_activations[-1][-1][conv_last_depth_layer_index])):
+              for final_activation in conv_activations[-1][-1][conv_last_depth_layer_index][conv_last_row_index]:
+                  final_activations[-1][0].append(final_activation)
+      final_w_inputs = final_activations[-1][0]
+      for w_final_layer in range(len(final_connected_neuron_layers)-1):
+          final_layer_z_values = final_f_propogate(final_w_inputs,w_final_layer)
+          final_w_inputs = []
+          final_z_values.append(final_layer_z_values)
+          for final_z_val in final_layer_z_values:
+              final_w_inputs.append(sigmoid(final_z_val))
+          final_activations[-1].append(final_w_inputs)
 
-     for final_layer in range(n_final_neuron_layers-1):#initial weight layer
-         for final_f_neuron in range(final_connected_neuron_layers[final_layer+1]):
-             for final_initial_neuron in range(final_connected_neuron_layers[final_layer]):
-                 final_weight_momentum = final_weight_momentums[final_layer][final_f_neuron][final_initial_neuron]
-
-                 #final weight magic
-                 final_weights[final_layer][final_f_neuron][final_initial_neuron]-=(final_z_values_derivatives[data_item_index][final_layer+1][final_f_neuron]*final_activations[data_item_index][final_layer][final_initial_neuron]+(final_weight_momentum*momentum_coefficient))*learning_rate
-                 final_weight_momentums[final_layer][final_f_neuron][final_initial_neuron] = final_z_values_derivatives[data_item_index][final_layer+1][final_f_neuron]*final_activations[data_item_index][final_layer][final_initial_neuron]+(final_weight_momentum*momentum_coefficient)
-
-                 final_bias_momentum = final_bias_momentums[final_layer][final_f_neuron]
-
-                 # final bias magic
-                 final_biases[final_layer][final_f_neuron] -= (final_z_values_derivatives[data_item_index][final_layer + 1][final_f_neuron] + (final_bias_momentum * momentum_coefficient)) * learning_rate
-                 final_bias_momentums[final_layer][final_f_neuron] = final_z_values_derivatives[data_item_index][final_layer + 1][final_f_neuron] + (final_bias_momentum * momentum_coefficient)
-
- #backprop for conv layers z values
- conv_z_values_derivatives = [] #indexed as [data_item_index][conv_layer][depth layer][row][pixel]//indexes not yet including -1s or +1s based on how list falls
- for data_item_index in range(len(conv_activations)):
-     final_z_values_derivatives_start_index = 0#starting point(in first layer of final z value derivatives) of each row in conv z derivative list
-     conv_z_values_derivatives.append([])
-     conv_z_values_derivatives[-1].append([])
-     #turns first final derivatives into final conv derivatives last layer
-     for last_conv_depth_layer in reversed(range(len(conv_activations[data_item_index][-1]))):
-         conv_z_values_derivatives[-1][-1].append([])
-         final_z_values_derivatives_start_index = last_conv_depth_layer*len(conv_activations[data_item_index][-1][0])*len(conv_activations[data_item_index][-1][0][0])
-         for last_conv_row in range(len(conv_activations[data_item_index][-1][last_conv_depth_layer])):
-             conv_z_values_derivatives[-1][-1][-1].append([])
-             if last_conv_row != 0:
-                 final_z_values_derivatives_start_index+=len(conv_activations[data_item_index][-1][0][0])
-             for last_conv_deriv_pixel in range(len(conv_activations[data_item_index][-1][last_conv_depth_layer][last_conv_row])):
-                 conv_z_values_derivatives[-1][-1][-1][-1].append(final_z_values_derivatives[data_item_index][0][last_conv_deriv_pixel+final_z_values_derivatives_start_index])
-     for conv_layer_index in reversed(range(1,len(conv_layers))):
-         conv_z_values_derivatives[-1].append([])
-         if conv_layers[conv_layer_index][0] == "conv":
-             n_conv_depth_layers = len(conv_activations[data_item_index][conv_layer_index])
-             filter_horizontal_step = conv_layers[conv_layer_index][2]
-             filter_vertical_step = conv_layers[conv_layer_index][3]
-             filters_tl_pixels = []#list of all top left pixel coordinates in layer, with each [x,y] list
-             for f_pixel_row in range(len(conv_activations[data_item_index][conv_layer_index+1][0])):
-                 tl_row = f_pixel_row*filter_vertical_step#top left row index of filter
-                 for f_pixel_column in range(len(conv_activations[data_item_index][conv_layer_index+1][0][0])):
-                     filters_tl_pixels.append([f_pixel_column*filter_horizontal_step,tl_row])
-             for filter in range(conv_layers[conv_layer_index][1]):
-                 filter_f_depth_layer_start_index = filter*n_conv_depth_layers
-                 filter_height = conv_layers[conv_layer_index][4 + (2 * filter)]
-                 filter_width = conv_layers[conv_layer_index][5 + (2 * filter)]
-                 for conv_depth_layer_index in range(n_conv_depth_layers):
-                     conv_z_values_derivatives[-1][-1].append([])
-                     for conv_row_index in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index])):
-                         conv_z_values_derivatives[-1][-1][-1].append([])
-                         for conv_pixel_index in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index][conv_row_index])):
-                             conv_z_value_derivative = 0
-                             for tl_pixel in filters_tl_pixels:
-                                 if tl_pixel[1]<=conv_row_index<tl_pixel[1]+filter_height and tl_pixel[0]<=conv_pixel_index<tl_pixel[0]+filter_width:
-                                     conv_z_value_derivative+=conv_weights[conv_layer_index][filter][conv_row_index-tl_pixel[1]][conv_pixel_index-tl_pixel[0]]*deriv_sigmoid(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index][conv_row_index][conv_pixel_index])
-                             conv_z_values_derivatives[-1][-1][-1][-1].append(conv_z_value_derivative)
-         elif conv_layers[conv_layer_index][0] == "maxpool":
-             pool_height = conv_layers[conv_layer_index][1]
-             pool_width = conv_layers[conv_layer_index][2]
-             for conv_depth_layer_index in range(len(conv_activations[data_item_index][conv_layer_index])):
-                 conv_z_values_derivatives[-1][-1].append([])
-                 for depth_layer_row_index in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index])):
-                     conv_z_values_derivatives[-1][-1][-1].append([])
-                     f_pool_row = int(depth_layer_row_index/pool_height)
-                     pixel_in_filter_row = depth_layer_row_index%pool_height
-                     for column_index in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index][depth_layer_row_index])):
-                         f_pool_column = int(column_index/pool_width)
-                         pixel_in_filter_column = column_index % pool_width
-                         if pixel_in_filter_row == conv_winners[data_item_index][conv_layer_index][conv_depth_layer_index][f_pool_row][f_pool_column][0] and pixel_in_filter_column == conv_winners[data_item_index][conv_layer_index][conv_depth_layer_index][f_pool_row][f_pool_column][1]:
-                             conv_z_values_derivatives[-1][-1][-1][-1].append(conv_z_values_derivatives[-1][-2][conv_depth_layer_index][f_pool_row][f_pool_column])
-                         else:
-                             conv_z_values_derivatives[-1][-1][-1][-1].append(0)
-         elif conv_layers[conv_layer_index][0] == "relu":
-             for conv_depth_layer_index in range(len(conv_activations[data_item_index][conv_layer_index])):
-                 conv_z_values_derivatives[-1][-1].append([])
-                 for conv_row in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index])):
-                     conv_z_values_derivatives[-1][-1][-1].append([])
-                     for pixel_column in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index][conv_row])):
-                         if conv_activations[data_item_index][conv_layer_index+1][conv_depth_layer_index][conv_row][pixel_column]!=0:
-                             conv_z_values_derivatives[-1][-1][-1][-1].append(conv_z_values_derivatives[-1][-2][conv_depth_layer_index][conv_row][pixel_column])
-                         else:
-                             conv_z_values_derivatives[-1][-1][-1][-1].append(0)
-
-     conv_z_values_derivatives[-1] = list(reversed(conv_z_values_derivatives[-1]))
-     for conv_layer in range(len(conv_layers)-1):#initial weight layer
-         #no need to do this for other layers bc those dont have weights
-         if conv_layers[conv_layer][0] == "conv":
-             for filter_index in range(conv_layers[conv_layer][1]):#finds derivative for entire filter, then use to find weight derivs
-                 #filter_derivatives = [[] for i in range(filter_height)]
-                 filter_height = conv_layers[conv_layer][4+(2*filter_index)]
-                 filter_width = conv_layers[conv_layer][5+(2*filter_index)]
-                 filter_vertical_step = conv_layers[conv_layer][3]
-                 filter_horizontal_step = conv_layers[conv_layer][2]
-                 f_depth_layer_start_index = len(conv_activations[data_item_index][conv_layer])*filter_index#first forward depth layer this filter affects
-                 f_z_derivatives_depth_layers = conv_z_values_derivatives[data_item_index][conv_layer][f_depth_layer_start_index:f_depth_layer_start_index+len(conv_activations[data_item_index][conv_layer])]
-                 for f_pixel_derivative_row in range(len(f_z_derivatives_depth_layers[0])):
-                     filter_tl_row = f_pixel_derivative_row*filter_vertical_step
-                     filter_height_adjustor = 0
-                     if filter_tl_row+filter_height>len(f_z_derivatives_depth_layers[0]):
-                         filter_height_adjustor = filter_tl_row+filter_height-len(f_z_derivatives_depth_layers[0])
-                     for f_pixel_derivative_column in range(len(f_z_derivatives_depth_layers[0][0])):
-                         filter_tl_column = f_pixel_derivative_column*filter_horizontal_step
-                         filter_width_adjustor = 0
-                         if filter_tl_column + filter_width > len(f_z_derivatives_depth_layers[0][0]):
-                             filter_width_adjustor = filter_tl_column + filter_width - len(f_z_derivatives_depth_layers[0][0])
-                         for filter_depth_layer in range(len(f_z_derivatives_depth_layers)):
-                             for in_filter_row in range(filter_height-filter_height_adjustor):
-                                 for in_filter_column in range(filter_width-filter_width_adjustor):
-                                     conv_weight_momentum = conv_weight_momentums[conv_layer][filter_index][in_filter_row][in_filter_column]
-
-                                     #conv weight magic
-                                     conv_weights[conv_layer][filter_index][in_filter_row][in_filter_column] -= (f_z_derivatives_depth_layers[filter_depth_layer][f_pixel_derivative_row][f_pixel_derivative_column]*conv_activations[data_item_index][conv_layer][filter_depth_layer][filter_tl_row+in_filter_row][filter_tl_column+in_filter_column]+(conv_weight_momentum*momentum_coefficient))*learning_rate
-                                     conv_weight_momentums[conv_layer][filter_index][in_filter_row][in_filter_column] = f_z_derivatives_depth_layers[filter_depth_layer][f_pixel_derivative_row][f_pixel_derivative_column]*conv_activations[data_item_index][conv_layer][filter_depth_layer][filter_tl_row+in_filter_row][filter_tl_column+in_filter_column]+(conv_weight_momentum*momentum_coefficient)
-
-                                     conv_bias_momentum = conv_bias_momentums[conv_layer][filter_depth_layer + (filter_index * len(conv_activations[data_item_index][conv_layer]))][f_pixel_derivative_row][f_pixel_derivative_column]
-
-                                     # conv bias magic
-                                     conv_biases[conv_layer][filter_depth_layer + (filter_index * len(conv_activations[data_item_index][conv_layer]))][f_pixel_derivative_row][f_pixel_derivative_column] -= (f_z_derivatives_depth_layers[filter_depth_layer][f_pixel_derivative_row][f_pixel_derivative_column] + (conv_bias_momentum * momentum_coefficient)) * learning_rate
-                                     conv_bias_momentums[conv_layer][filter_depth_layer + (filter_index * len(conv_activations[data_item_index][conv_layer]))][f_pixel_derivative_row][f_pixel_derivative_column] = f_z_derivatives_depth_layers[filter_depth_layer][f_pixel_derivative_row][f_pixel_derivative_column] + (conv_bias_momentum * momentum_coefficient)
-
- if gen_error<lowest_error:
-     lowest_error = gen_error
-     with open('conv_weights.txt', 'w') as f:
-         for item in conv_weights:
-                 f.write("%s\n"%item)
-     with open('final_weights.txt', 'w') as f:
-         for weights_layer in final_weights:
-                 f.write("%s\n"%weights_layer)
-     with open('final_biases.txt', 'w') as f:
-         for item in final_biases:
-             f.write("%s\n" % item)
-     for conv_bias_layer_index in range(len(conv_biases)):
-         with open('conv_biases%s.txt'%conv_bias_layer_index, 'w') as f:
-             for conv_depth_layer in conv_biases[conv_bias_layer_index]:
-                 f.write("%s\n" % conv_depth_layer)
+  #gen error
+  gen_error = 0
+  for data_index in range(len(final_activations)):
+      for final_output_item in range(len(final_activations[data_index][-1])):
+          gen_error += .5 * ((goal_outputs[data_index][final_output_item] - final_activations[data_index][-1][final_output_item]) ** 2)
 
 
+  # backprop for final layers z values
+  final_z_values_derivatives = []# indexed as [data_item_index][neuron layer][neuron index]//indexes not yet including -1s or +1s based on how list falls
+  for data_item_index in range(len(final_activations)):
+      final_z_values_derivatives.append([])
+      final_z_values_derivatives[-1].append([])
+      for output_item_index in range(len(final_activations[data_item_index][-1])):
+          final_z_values_derivatives[-1][-1].append((final_activations[data_item_index][-1][output_item_index]-goal_outputs[data_item_index][output_item_index])*deriv_sigmoid(final_activations[data_item_index][-1][output_item_index]))
+      for final_z_values_derivatives_layer in reversed(range(len(final_activations[-1]) - 1)):
+          final_z_values_derivatives[-1].append([])
+          for final_z_value_index in range(len(final_activations[-1][final_z_values_derivatives_layer])):
+              final_z_value = final_activations[-1][final_z_values_derivatives_layer][final_z_value_index]
+              final_z_value_derivative = 0
+              for f_layer_z_value_derivative_index in range(len(final_z_values_derivatives[-1][-2])):
+                  final_z_value_derivative +=  final_weights[final_z_values_derivatives_layer][f_layer_z_value_derivative_index][final_z_value_index]*deriv_sigmoid(final_activations[data_item_index][final_z_values_derivatives_layer][final_z_value_index])
+              final_z_values_derivatives[-1][-1].append(final_z_value_derivative)
+      final_z_values_derivatives[-1]=list(reversed(final_z_values_derivatives[-1]))
 
- print("gen %s error..... "%gen,gen_error)
+      for final_layer in range(n_final_neuron_layers-1):#initial weight layer
+          for final_f_neuron in range(final_connected_neuron_layers[final_layer+1]):
+              for final_initial_neuron in range(final_connected_neuron_layers[final_layer]):
+                  final_weight_momentum = final_weight_momentums[final_layer][final_f_neuron][final_initial_neuron]
+
+                  #final weight magic
+                  final_weights[final_layer][final_f_neuron][final_initial_neuron]-=(final_z_values_derivatives[data_item_index][final_layer+1][final_f_neuron]*final_activations[data_item_index][final_layer][final_initial_neuron]+(final_weight_momentum*momentum_coefficient))*learning_rate
+                  final_weight_momentums[final_layer][final_f_neuron][final_initial_neuron] = final_z_values_derivatives[data_item_index][final_layer+1][final_f_neuron]*final_activations[data_item_index][final_layer][final_initial_neuron]+(final_weight_momentum*momentum_coefficient)
+
+                  final_bias_momentum = final_bias_momentums[final_layer][final_f_neuron]
+
+                  # final bias magic
+                  final_biases[final_layer][final_f_neuron] -= (final_z_values_derivatives[data_item_index][final_layer + 1][final_f_neuron] + (final_bias_momentum * momentum_coefficient)) * learning_rate
+                  final_bias_momentums[final_layer][final_f_neuron] = final_z_values_derivatives[data_item_index][final_layer + 1][final_f_neuron] + (final_bias_momentum * momentum_coefficient)
+
+  #backprop for conv layers z values
+  conv_z_values_derivatives = [] #indexed as [data_item_index][conv_layer][depth layer][row][pixel]//indexes not yet including -1s or +1s based on how list falls
+  for data_item_index in range(len(conv_activations)):
+      final_z_values_derivatives_start_index = 0#starting point(in first layer of final z value derivatives) of each row in conv z derivative list
+      conv_z_values_derivatives.append([])
+      conv_z_values_derivatives[-1].append([])
+      #turns first final derivatives into final conv derivatives last layer
+      for last_conv_depth_layer in reversed(range(len(conv_activations[data_item_index][-1]))):
+          conv_z_values_derivatives[-1][-1].append([])
+          final_z_values_derivatives_start_index = last_conv_depth_layer*len(conv_activations[data_item_index][-1][0])*len(conv_activations[data_item_index][-1][0][0])
+          for last_conv_row in range(len(conv_activations[data_item_index][-1][last_conv_depth_layer])):
+              conv_z_values_derivatives[-1][-1][-1].append([])
+              if last_conv_row != 0:
+                  final_z_values_derivatives_start_index+=len(conv_activations[data_item_index][-1][0][0])
+              for last_conv_deriv_pixel in range(len(conv_activations[data_item_index][-1][last_conv_depth_layer][last_conv_row])):
+                  conv_z_values_derivatives[-1][-1][-1][-1].append(final_z_values_derivatives[data_item_index][0][last_conv_deriv_pixel+final_z_values_derivatives_start_index])
+      for conv_layer_index in reversed(range(1,len(conv_layers))):
+          conv_z_values_derivatives[-1].append([])
+          if conv_layers[conv_layer_index][0] == "conv":
+              n_conv_depth_layers = len(conv_activations[data_item_index][conv_layer_index])
+              filter_horizontal_step = conv_layers[conv_layer_index][2]
+              filter_vertical_step = conv_layers[conv_layer_index][3]
+              filters_tl_pixels = []#list of all top left pixel coordinates in layer, with each [x,y] list
+              for f_pixel_row in range(len(conv_activations[data_item_index][conv_layer_index+1][0])):
+                  tl_row = f_pixel_row*filter_vertical_step#top left row index of filter
+                  for f_pixel_column in range(len(conv_activations[data_item_index][conv_layer_index+1][0][0])):
+                      filters_tl_pixels.append([f_pixel_column*filter_horizontal_step,tl_row])
+              for filter in range(conv_layers[conv_layer_index][1]):
+                  filter_f_depth_layer_start_index = filter*n_conv_depth_layers
+                  filter_height = conv_layers[conv_layer_index][4 + (2 * filter)]
+                  filter_width = conv_layers[conv_layer_index][5 + (2 * filter)]
+                  for conv_depth_layer_index in range(n_conv_depth_layers):
+                      conv_z_values_derivatives[-1][-1].append([])
+                      for conv_row_index in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index])):
+                          conv_z_values_derivatives[-1][-1][-1].append([])
+                          for conv_pixel_index in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index][conv_row_index])):
+                              conv_z_value_derivative = 0
+                              for tl_pixel in filters_tl_pixels:
+                                  if tl_pixel[1]<=conv_row_index<tl_pixel[1]+filter_height and tl_pixel[0]<=conv_pixel_index<tl_pixel[0]+filter_width:
+                                      conv_z_value_derivative+=conv_weights[conv_layer_index][filter][conv_row_index-tl_pixel[1]][conv_pixel_index-tl_pixel[0]]*deriv_sigmoid(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index][conv_row_index][conv_pixel_index])
+                              conv_z_values_derivatives[-1][-1][-1][-1].append(conv_z_value_derivative)
+          elif conv_layers[conv_layer_index][0] == "maxpool":
+              pool_height = conv_layers[conv_layer_index][1]
+              pool_width = conv_layers[conv_layer_index][2]
+              for conv_depth_layer_index in range(len(conv_activations[data_item_index][conv_layer_index])):
+                  conv_z_values_derivatives[-1][-1].append([])
+                  for depth_layer_row_index in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index])):
+                      conv_z_values_derivatives[-1][-1][-1].append([])
+                      f_pool_row = int(depth_layer_row_index/pool_height)
+                      pixel_in_filter_row = depth_layer_row_index%pool_height
+                      for column_index in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index][depth_layer_row_index])):
+                          f_pool_column = int(column_index/pool_width)
+                          pixel_in_filter_column = column_index % pool_width
+                          if pixel_in_filter_row == conv_winners[data_item_index][conv_layer_index][conv_depth_layer_index][f_pool_row][f_pool_column][0] and pixel_in_filter_column == conv_winners[data_item_index][conv_layer_index][conv_depth_layer_index][f_pool_row][f_pool_column][1]:
+                              conv_z_values_derivatives[-1][-1][-1][-1].append(conv_z_values_derivatives[-1][-2][conv_depth_layer_index][f_pool_row][f_pool_column])
+                          else:
+                              conv_z_values_derivatives[-1][-1][-1][-1].append(0)
+          elif conv_layers[conv_layer_index][0] == "relu":
+              for conv_depth_layer_index in range(len(conv_activations[data_item_index][conv_layer_index])):
+                  conv_z_values_derivatives[-1][-1].append([])
+                  for conv_row in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index])):
+                      conv_z_values_derivatives[-1][-1][-1].append([])
+                      for pixel_column in range(len(conv_activations[data_item_index][conv_layer_index][conv_depth_layer_index][conv_row])):
+                          if conv_activations[data_item_index][conv_layer_index+1][conv_depth_layer_index][conv_row][pixel_column]!=0:
+                              conv_z_values_derivatives[-1][-1][-1][-1].append(conv_z_values_derivatives[-1][-2][conv_depth_layer_index][conv_row][pixel_column])
+                          else:
+                              conv_z_values_derivatives[-1][-1][-1][-1].append(0)
+
+      conv_z_values_derivatives[-1] = list(reversed(conv_z_values_derivatives[-1]))
+      for conv_layer in range(len(conv_layers)-1):#initial weight layer
+          #no need to do this for other layers bc those dont have weights
+          if conv_layers[conv_layer][0] == "conv":
+              for filter_index in range(conv_layers[conv_layer][1]):#finds derivative for entire filter, then use to find weight derivs
+                  #filter_derivatives = [[] for i in range(filter_height)]
+                  filter_height = conv_layers[conv_layer][4+(2*filter_index)]
+                  filter_width = conv_layers[conv_layer][5+(2*filter_index)]
+                  filter_vertical_step = conv_layers[conv_layer][3]
+                  filter_horizontal_step = conv_layers[conv_layer][2]
+                  f_depth_layer_start_index = len(conv_activations[data_item_index][conv_layer])*filter_index#first forward depth layer this filter affects
+                  f_z_derivatives_depth_layers = conv_z_values_derivatives[data_item_index][conv_layer][f_depth_layer_start_index:f_depth_layer_start_index+len(conv_activations[data_item_index][conv_layer])]
+                  for f_pixel_derivative_row in range(len(f_z_derivatives_depth_layers[0])):
+                      filter_tl_row = f_pixel_derivative_row*filter_vertical_step
+                      filter_height_adjustor = 0
+                      if filter_tl_row+filter_height>len(f_z_derivatives_depth_layers[0]):
+                          filter_height_adjustor = filter_tl_row+filter_height-len(f_z_derivatives_depth_layers[0])
+                      for f_pixel_derivative_column in range(len(f_z_derivatives_depth_layers[0][0])):
+                          filter_tl_column = f_pixel_derivative_column*filter_horizontal_step
+                          filter_width_adjustor = 0
+                          if filter_tl_column + filter_width > len(f_z_derivatives_depth_layers[0][0]):
+                              filter_width_adjustor = filter_tl_column + filter_width - len(f_z_derivatives_depth_layers[0][0])
+                          for filter_depth_layer in range(len(f_z_derivatives_depth_layers)):
+                              for in_filter_row in range(filter_height-filter_height_adjustor):
+                                  for in_filter_column in range(filter_width-filter_width_adjustor):
+                                      conv_weight_momentum = conv_weight_momentums[conv_layer][filter_index][in_filter_row][in_filter_column]
+
+                                      #conv weight magic
+                                      conv_weights[conv_layer][filter_index][in_filter_row][in_filter_column] -= (f_z_derivatives_depth_layers[filter_depth_layer][f_pixel_derivative_row][f_pixel_derivative_column]*conv_activations[data_item_index][conv_layer][filter_depth_layer][filter_tl_row+in_filter_row][filter_tl_column+in_filter_column]+(conv_weight_momentum*momentum_coefficient))*learning_rate
+                                      conv_weight_momentums[conv_layer][filter_index][in_filter_row][in_filter_column] = f_z_derivatives_depth_layers[filter_depth_layer][f_pixel_derivative_row][f_pixel_derivative_column]*conv_activations[data_item_index][conv_layer][filter_depth_layer][filter_tl_row+in_filter_row][filter_tl_column+in_filter_column]+(conv_weight_momentum*momentum_coefficient)
+
+                                      conv_bias_momentum = conv_bias_momentums[conv_layer][filter_depth_layer + (filter_index * len(conv_activations[data_item_index][conv_layer]))][f_pixel_derivative_row][f_pixel_derivative_column]
+
+                                      # conv bias magic
+                                      conv_biases[conv_layer][filter_depth_layer + (filter_index * len(conv_activations[data_item_index][conv_layer]))][f_pixel_derivative_row][f_pixel_derivative_column] -= (f_z_derivatives_depth_layers[filter_depth_layer][f_pixel_derivative_row][f_pixel_derivative_column] + (conv_bias_momentum * momentum_coefficient)) * learning_rate
+                                      conv_bias_momentums[conv_layer][filter_depth_layer + (filter_index * len(conv_activations[data_item_index][conv_layer]))][f_pixel_derivative_row][f_pixel_derivative_column] = f_z_derivatives_depth_layers[filter_depth_layer][f_pixel_derivative_row][f_pixel_derivative_column] + (conv_bias_momentum * momentum_coefficient)
+
+  if gen_error<lowest_error:
+      lowest_error = gen_error
+      with open('conv_weights.txt', 'w') as f:
+          for item in conv_weights:
+                  f.write("%s\n"%item)
+      with open('final_weights.txt', 'w') as f:
+          for weights_layer in final_weights:
+                  f.write("%s\n"%weights_layer)
+      with open('final_biases.txt', 'w') as f:
+          for item in final_biases:
+              f.write("%s\n" % item)
+      for conv_bias_layer_index in range(len(conv_biases)):
+          with open('conv_biases%s.txt'%conv_bias_layer_index, 'w') as f:
+              for conv_depth_layer in conv_biases[conv_bias_layer_index]:
+                  f.write("%s\n" % conv_depth_layer)
 
 
+
+  print("gen %s error..... "%gen,gen_error)
